@@ -1,0 +1,1 @@
+cmd_Release/kcp.node := c++ -bundle -undefined dynamic_lookup -Wl,-search_paths_first -mmacosx-version-min=10.13 -arch arm64 -L./Release -stdlib=libc++  -o Release/kcp.node Release/obj.target/kcp/src/kcp/ikcp.o Release/obj.target/kcp/src/kcpobject.o Release/obj.target/kcp/src/node-kcp.o 

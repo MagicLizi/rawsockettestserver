@@ -1,0 +1,37 @@
+{
+  "name": "node-kcp",
+  "version": "1.0.12",
+  "description": "KCP protocol for Node.js",
+  "main": "node-kcp.node",
+  "dependencies": {
+    "nan": "^2.14.0"
+  },
+  "devDependencies": {
+    "chai": "latest",
+    "grunt": "^1.0.4",
+    "grunt-contrib-clean": "latest",
+    "grunt-mocha-test": "latest",
+    "mocha": "^7.0.0"
+  },
+  "scripts": {
+    "test": "grunt",
+    "install": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leenjewel/node-kcp.git"
+  },
+  "keywords": [
+    "kcp",
+    "protocol",
+    "game",
+    "server"
+  ],
+  "author": "leenjewel",
+  "license": "Apache-2.0",
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/leenjewel/node-kcp/issues"
+  },
+  "homepage": "https://github.com/leenjewel/node-kcp#readme"
+}
