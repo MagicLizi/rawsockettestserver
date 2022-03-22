@@ -4,6 +4,8 @@ module.exports = function(){
     var server = dgram.createSocket('udp4');
     var clients = {};
     var interval = 0;
+    var kcpobj = new kcp.KCP(928, context);
+    kcpobj.nodelay(1, interval, 2, 1);
 
     var output = function(data, size, context) {
         server.send(data, 0, size, context.port, context.address);
@@ -17,16 +19,12 @@ module.exports = function(){
     server.on('message', (msg, rinfo) => {
         var k = rinfo.address+'_'+rinfo.port;
         if (undefined === clients[k]) {
-            var context = {
-                address : rinfo.address,
-                port : rinfo.port
-            };
-            var kcpobj = new kcp.KCP(928, context);
-            kcpobj.nodelay(1, interval, 2, 1);
+            // var context = {
+            //     address : rinfo.address,
+            //     port : rinfo.port
+            // };
             kcpobj.output(output);
-            clients[k] = kcpobj;
         }
-        var kcpobj = clients[k];
         kcpobj.input(msg);
     });
 
@@ -34,13 +32,10 @@ module.exports = function(){
         var address = server.address();
         console.log(`kcp server listening ${address.address} : ${address.port}`);
         setInterval(() => {
-            for (var k in clients) {
-                var kcpobj = clients[k];
-                kcpobj.update(Date.now());
-                var recv = kcpobj.recv();
-                if (recv) {
-                    kcpobj.send(recv);
-                }
+            kcpobj.update(Date.now());
+            var recv = kcpobj.recv();
+            if (recv) {
+                kcpobj.send(recv);
             }
         }, interval);
     });
