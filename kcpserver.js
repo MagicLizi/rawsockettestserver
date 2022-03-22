@@ -23,7 +23,6 @@ module.exports = function(){
             };
             var kcpobj = new kcp.KCP(928, context);
             kcpobj.nodelay(1, interval, 2, 1);
-            console.log(kcpobj);
             kcpobj.output(output);
             clients[k] = kcpobj;
         }
